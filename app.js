@@ -9,7 +9,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
 
+var https = require('https');
+var privateKey  = fs.readFileSync('ssh/server.key', 'utf8');
+var certificate = fs.readFileSync('ssh/server.crt', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+
 var app = express();
+
+var httpsServer = https.createServer(credentials, app);
 
 var ws = require('./lib/ws');
 
@@ -46,7 +54,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(PORT);
+httpsServer.listen(PORT);
 
 console.log(`server is running on port ${PORT}`)
 

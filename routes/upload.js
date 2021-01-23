@@ -30,7 +30,7 @@ router.post('/file', (req, res, next) => {
         // "language": "ko"
       };
 
-      fetch('http://183.96.253.147:8080/api/services/asr/transcription', {
+      fetch('https://183.96.253.147:8080/api/services/asr/transcription', {
           method: 'POST',
           mode: 'cors',
           headers: {
